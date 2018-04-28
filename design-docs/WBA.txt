@@ -1,0 +1,32 @@
+Work Breakdown Agreement 
+
+25th April, 2018
+Adam-
+Class diagrams & Rationale
+		Force Ability
+		Lightsabre
+		Ben Kenobi
+
+Alex-
+Class diagrams & Rationale
+		Droids
+		Leave
+		
+28th April, 2018
+Adam
+Review & Testing 
+		Droids
+		Healing
+Alex
+Review & Testing
+		Force Ability
+		Lightsabre
+		Ben Kenobi
+
+29th April, 2018
+Review and Improve (TBA)
+Finalise Design & SUBMIT
+
+
+I, Alex Minagall, accept this Work Breakdown Agreement
+I, , accept this Work Breakdown Agreement
