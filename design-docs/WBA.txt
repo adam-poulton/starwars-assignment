@@ -16,7 +16,7 @@ Class diagrams & Rationale
 Adam
 Review & Testing 
 		Droids
-		Healing
+		Leave
 Alex
 Review & Testing
 		Force Ability
