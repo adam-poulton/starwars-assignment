@@ -53,6 +53,11 @@ public class Force {
         this.ability = ability;
     }
 
+    /**
+     * Method evaluates if the current state of <code>Force</code> permits wielding a lightsaber.
+     *
+     * @return true if <code>Force</code> permits wielding a lightsaber, false if it does not.
+     */
     public boolean canUseLightSaber(){
         return getAbility() >= LIGHTSABER_REQUIREMENT;
     }
