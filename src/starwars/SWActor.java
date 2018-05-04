@@ -26,6 +26,11 @@ import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
 import starwars.actions.Move;
+/*
+ * Changelog
+ *
+ * 2018-05-04:	added force attribute to support implementation of The Force (adamp)
+ */
 
 public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface {
 	
@@ -52,6 +57,9 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	
 	/**A set of <code>Capabilities</code> of this <code>SWActor</code>*/
 	private HashSet<Capability> capabilities;
+
+	/**Defines the proficiency this <code>SWActor</code> has with the force*/
+	private Force force;
 	
 	/**
 	 * Constructor for the <code>SWActor</code>.
