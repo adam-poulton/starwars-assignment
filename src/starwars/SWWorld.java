@@ -7,6 +7,7 @@ import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.space.World;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Take;
+import starwars.actions.Train;
 import starwars.entities.*;
 import starwars.entities.actors.*;
 
@@ -118,6 +119,8 @@ public class SWWorld extends World {
 		luke.setShortDescription("Luke");
 		entityManager.setLocation(luke, loc);
 		luke.resetMoveCommands(loc);
+		luke.setForce(new Force());
+		luke.addCapability(Capability.TRAINABLE);
 		
 		
 		// Beggar's Canyon 
@@ -200,7 +203,7 @@ public class SWWorld extends World {
 		SWLocation where = (SWLocation)entityManager.whereIs(a); // requires a cast for no reason I can discern
 		return where.hasExit(whichDirection);
 	}
-	
+
 	/**
 	 * Accessor for the grid.
 	 * 
