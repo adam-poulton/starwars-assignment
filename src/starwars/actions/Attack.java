@@ -120,7 +120,7 @@ public class Attack extends SWAffordance implements SWActionInterface {
 					itemCarried.takeDamage(1); // weapon gets blunt
 					a.takeDamage(energyForAttackWithWeapon); // actor uses energy to attack
 				}
-				else {//an attack with a none weapon
+				else {//an attack with a non weapon
 					if (targetIsActor) {
 						targetActor.say("\t" + targetActor.getShortDescription()
 								+ " is amused by " + a.getShortDescription()
