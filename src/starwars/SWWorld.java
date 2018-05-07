@@ -120,7 +120,7 @@ public class SWWorld extends World {
 		entityManager.setLocation(luke, loc);
 		luke.resetMoveCommands(loc);
 		luke.setForce(new Force());
-		luke.addCapability(Capability.TRAINABLE);
+		//luke.addCapability(Capability.TRAINABLE);
 		
 		
 		// Beggar's Canyon 

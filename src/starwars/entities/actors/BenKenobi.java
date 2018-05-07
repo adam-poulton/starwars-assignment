@@ -7,9 +7,7 @@ import starwars.SWWorld;
 import starwars.Team;
 import starwars.actions.Move;
 import starwars.entities.LightSaber;
-import starwars.entities.actors.behaviors.AttackInformation;
-import starwars.entities.actors.behaviors.AttackNeighbours;
-import starwars.entities.actors.behaviors.Patrol;
+import starwars.entities.actors.behaviors.*;
 
 /**
  * Ben (aka Obe-Wan) Kenobi.  
@@ -48,13 +46,22 @@ public class BenKenobi extends SWLegend {
 		if(isDead()) {
 			return;
 		}
+
+		TrainInformation train;
+		train = TrainNeighbours.trainLocals(ben, ben.world, true);
+
+		if (train != null) {
+			say(getShortDescription() + " teaches knowledge of lightsabres to " +
+				train.entity.getShortDescription());
+			scheduler.schedule(train.affordance, ben, 1);
+		}
 		
 		AttackInformation attack;
 		attack = AttackNeighbours.attackLocals(ben,  ben.world, true, true);
 		
 		if (attack != null) {
 			say(getShortDescription() + " suddenly looks sprightly and attacks " +
-		attack.entity.getShortDescription());
+				attack.entity.getShortDescription());
 			scheduler.schedule(attack.affordance, ben, 1);
 		}
 		else {

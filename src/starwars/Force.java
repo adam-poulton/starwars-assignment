@@ -61,4 +61,13 @@ public class Force {
     public boolean canUseLightSaber(){
         return this.getAbility() >= LIGHTSABER_REQUIREMENT;
     }
+
+    /**
+     * Method returns the minimum <code>ability</code> required to wield a lightsaber
+     *
+     * @return the minimum <code>ability</code> required to use a lightsaber
+     */
+    public static int getLightsaberRequirement(){
+        return LIGHTSABER_REQUIREMENT;
+    }
 }
