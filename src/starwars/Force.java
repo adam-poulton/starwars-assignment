@@ -3,7 +3,7 @@ package starwars;
 
 /**
  * This class represents "The Force"
- * Each <code>SWActor</code> has their ability to interact with the force defined within a <code>Force</code> class
+ * A <code>SWActor</code>'s interactions with the force are defined in this <code>Force</code> class
  *
  * @author Adam Poulton
  *
@@ -19,19 +19,19 @@ public class Force {
     /**
      * Default constructor for the <code>Force</code>.
      *
-     * Initialises <code>ability</code> to be zero as appropriate for a non force-user.
+     * Initialises <code>ability</code> to be zero.
      */
     public Force(){
-        setAbility(0);
+        this.setAbility(0);
     }
 
     /**
      * Constructor for the <code>Force</code>.
      *
-     * @param   ability the initial value of the ability for this <code>Force</code>.
+     * @param   ability the initial value of the ability of this <code>Force</code>.
      */
     public Force(int ability){
-        setAbility(ability);
+        this.setAbility(ability);
     }
 
     /**
@@ -59,6 +59,6 @@ public class Force {
      * @return true if <code>Force</code> permits wielding a lightsaber, false if it does not.
      */
     public boolean canUseLightSaber(){
-        return getAbility() >= LIGHTSABER_REQUIREMENT;
+        return this.getAbility() >= LIGHTSABER_REQUIREMENT;
     }
 }
