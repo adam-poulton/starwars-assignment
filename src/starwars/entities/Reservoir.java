@@ -12,7 +12,7 @@ import starwars.actions.Dip;
  * 
  * @author 	ram
  * @see 	{@link starwars.entities.Canteen}
- * @see {@link starwars.entites.Fillable}
+ * @see {@link starwars.entities.Fillable}
  * @see {@link starwars.actions.Fill} 
  */
 public class Reservoir extends SWEntity {
