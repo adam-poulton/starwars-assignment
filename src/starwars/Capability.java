@@ -13,6 +13,8 @@ public enum Capability {
 	WEAPON,//WEAPON capability allows an entity to Attack another entity which has the Attack Affordance
 	FILLABLE,//FILLABLE capability allows an entity to be refilled by another entity that 
 	            // has the Dip affordance.  Any FILLABLE Entity MUST implement the Fillable interface
-	DRINKABLE,//DRINKABLE capability allows an entity to be consumed by another entity 
+	DRINKABLE,//DRINKABLE capability allows an entity to be consumed by another entity
+	TRAINABLE,//TRAINABLE capability allows an entity to be trained in the force by another entity
+				// which has the Train affordance. Any TRAINABLE Entity MUST implement the Trainable interface
 	
 }
