@@ -58,7 +58,10 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	/**A set of <code>Capabilities</code> of this <code>SWActor</code>*/
 	private HashSet<Capability> capabilities;
 
-	/**Defines the proficiency this <code>SWActor</code> has with the force*/
+	/**
+	 * Defines the proficiency this <code>SWActor</code> has with the force.
+	 * <code>force</code> is null if this <code>SWActor</code> cannot interfac to use the force.
+	 */
 	private Force force;
 	
 	/**
@@ -280,8 +283,34 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		/* Actually, that's not the case: all non-movement actions are transferred to newActions before the movements are transferred. --ram */
 	}
 
+	/**
+	 * This method sets the <code>Force</code> for this <code>SWActor</code>.
+	 *
+	 * @author	adamp
+	 * @param 	force this <code>SWActor</code>'s force state
+	 * @pre		<code>force</code> is the actual force state of this <code>SWActor</code>
+	 */
+	public void setForce(Force force){
+		this.force = force;
+	}
 
-	
-	
+	/**
+	 * This method gets the <code>Force</code> for this <code>SWActor</code>.
+	 *
+	 * @return  the <code>force</code> for this <code>SWActor</code>
+	 */
+	public Force getForce(){
+		return this.force;
+	}
+
+    /**
+     * This method adds a <code>capability</code> for this <code>SWActor</code>.
+     *
+     * @author  adamp
+     * @param   c the <code>capability</code> that is to be added to this <code>SWActor</code>
+     */
+	public void addCapability(Capability c){
+	    this.capabilities.add(c);
+    }
 	
 }
