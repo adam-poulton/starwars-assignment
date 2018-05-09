@@ -56,9 +56,13 @@ public class Leave extends SWAffordance {
 	@Override
 	public void act(SWActor a) {
 		if (target instanceof SWEntityInterface) {
-			SWAction.getEntitymanager().setLocation((SWEntityInterface) target, SWAction.getEntitymanager().whereIs(a));
+			//After this is done
+			//the actor should be holding nothing
 			a.setItemCarried(null);
+			//item should be in the location of the actor when it was done,
+			SWAction.getEntitymanager().setLocation((SWEntityInterface) target, SWAction.getEntitymanager().whereIs(a));
 			target.removeAffordance(this);
+			//and the item should be able to be picked up again
 			target.addAffordance(new Take((SWEntityInterface) target, this.messageRenderer)); 
 		    }
 	}
