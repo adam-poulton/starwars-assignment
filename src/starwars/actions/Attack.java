@@ -6,6 +6,7 @@ import starwars.SWActionInterface;
 import starwars.SWActor;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
+import starwars.entities.LightSaber;
 
 /**
  * Command to attack entities.
@@ -74,7 +75,7 @@ public class Attack extends SWAffordance implements SWActionInterface {
 	/**
 	 * Perform the <code>Attack</code> command on an entity.
 	 * <p>
-	 * This method does not perform any damage (an attack) if,
+	 * This method does not //erform any damage (an attack) if,
 	 * <ul>
 	 * 	<li>The target of the <code>Attack</code> and the <code>SWActor a</code> are in the same <code>Team</code></li>
 	 * 	<li>The <code>SWActor a</code> is holding an item without the <code>WEAPON Affordance</code></li>
@@ -114,8 +115,16 @@ public class Attack extends SWAffordance implements SWActionInterface {
 			a.say(a.getShortDescription() + " is attacking " + target.getShortDescription() + "!");
 			
 			SWEntityInterface itemCarried = a.getItemCarried();
-			if (itemCarried != null) {//if the actor is carrying an item 
-				if (itemCarried.hasCapability(Capability.WEAPON)) {
+			if (itemCarried != null) {//if the actor is carrying an item
+				
+				//quick implementation of lightsaber requirement
+				//adamp - 09/05/18
+				if (itemCarried instanceof LightSaber && !a.getForce().canUseLightSaber()){//the actor is holding a lightsaber but does not meet requirements to attack with it
+					a.say(a.getShortDescription() + " has not been trained to use a " + itemCarried.getShortDescription());
+				}
+				
+				
+				else if (itemCarried.hasCapability(Capability.WEAPON)) {				
 					target.takeDamage(itemCarried.getHitpoints() + 1); // blunt weapon won't do much, but it will still do some damage
 					itemCarried.takeDamage(1); // weapon gets blunt
 					a.takeDamage(energyForAttackWithWeapon); // actor uses energy to attack
