@@ -152,7 +152,7 @@ public class SWWorld extends World {
 		// a canteen
 		loc = myGrid.getLocationByCoordinates(3,1);
 		SWEntity canteen = new Canteen(iface, 10,0);
-		canteen.setSymbol("©");
+		canteen.setSymbol("�");
 		canteen.setHitpoints(500);
 		entityManager.setLocation(canteen, loc);
 		canteen.addAffordance(new Take(canteen, iface));
@@ -180,7 +180,7 @@ public class SWWorld extends World {
 		
 		// A Tusken Raider
 		TuskenRaider tim = new TuskenRaider(10, "Tim", iface, this);
-		tim.setSymbol("∞");
+		tim.setSymbol("T");
 		loc = myGrid.getLocationByCoordinates(4,3);
 		entityManager.setLocation(tim, loc);
 
