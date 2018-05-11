@@ -36,10 +36,16 @@ public class Droid extends SWActor {
 			//in my design rationale and this is still true, just different terminology.
 			//i assume there will be more functionality in assignment 3 for this property
 			immobilityMessage();
-			return ;
-			
+			return;			
 		}
 		checkForBadlands();
+		if (this.owner != null){
+			this.say(String.format("now."));
+			return;
+		}
+		else{
+			return;
+		}
 
 	}
 
