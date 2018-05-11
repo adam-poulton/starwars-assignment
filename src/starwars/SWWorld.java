@@ -106,10 +106,10 @@ public class SWWorld extends World {
                 CompassBearing.EAST, CompassBearing.EAST,
                 CompassBearing.NORTHWEST, CompassBearing.NORTHWEST};
 		
-		//BenKenobi ben = BenKenobi.getBenKenobi(iface, this, patrolmoves);
-		//ben.setSymbol("B");
-		//loc = myGrid.getLocationByCoordinates(4,  5);
-		//entityManager.setLocation(ben, loc);
+		BenKenobi ben = BenKenobi.getBenKenobi(iface, this, patrolmoves);
+		ben.setSymbol("B");
+		loc = myGrid.getLocationByCoordinates(4,  5);
+		entityManager.setLocation(ben, loc);
 		
 		
 		loc = myGrid.getLocationByCoordinates(5,9);
@@ -186,7 +186,7 @@ public class SWWorld extends World {
 		
 		Droid C3PO = new Droid(10, "C3PO", iface, this);
 		C3PO.setSymbol("D");
-		loc = myGrid.getLocationByCoordinates(5,5);
+		loc = myGrid.getLocationByCoordinates(5,4);
 		entityManager.setLocation(C3PO, loc);
 
 	}

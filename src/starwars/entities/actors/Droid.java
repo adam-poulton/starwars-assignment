@@ -27,7 +27,10 @@ public class Droid extends SWActor {
 	@Override
 	public void act() {
 		if (isDead()) {
-			return;
+			//i think this is sufficient, still. I mentioned that the Droid would be immobile
+			//in my design rationale and this is still true, just different terminology
+			immobilityMessage();
+			return ;
 			
 		}
 		checkForBadlands();
@@ -48,6 +51,9 @@ public class Droid extends SWActor {
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 		return this.getShortDescription() + " [" + this.getHitpoints() + "] is at " + location.getShortDescription();
 
+	}
+	private String immobilityMessage() {
+		return (this.getShortDescription() + " is immobile." );
 	}
 	public void checkForBadlands() {
 		SWLocation location = this.world.getEntityManager().whereIs(this);
