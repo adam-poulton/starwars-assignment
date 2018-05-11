@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.monash.fit2099.gridworld.Grid;
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.SWAction;
 import starwars.SWActor;
 import starwars.SWLocation;
 import starwars.SWWorld;
@@ -27,7 +28,10 @@ public class Droid extends SWActor {
 	public void act() {
 		if (isDead()) {
 			return;
+			
 		}
+		checkForBadlands();
+
 	}
 
 	@Override
@@ -45,4 +49,9 @@ public class Droid extends SWActor {
 		return this.getShortDescription() + " [" + this.getHitpoints() + "] is at " + location.getShortDescription();
 
 	}
-}
+	public void checkForBadlands() {
+		SWLocation location = this.world.getEntityManager().whereIs(this);
+		if(location.getSymbol() == 'b'){ 
+		    takeDamage(5);
+		}
+}}
