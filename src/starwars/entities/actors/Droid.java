@@ -20,13 +20,28 @@ public class Droid extends SWActor {
 
 	private String name;
 	private SWActor owner;
-
+	/**
+	 * Constructor for the <code>Droid</code>.
+	 * <p>
+	 * The constructor initializes the <code>actions</code> list of this <code>Droid</code>.
+	 * <p>
+	 * @param 	team to which this <code>SWActor</code> belongs to
+	 * @param 	hitpoints initial hitpoints of this <code>SWActor</code> to start with
+	 * @param 	m	message renderer for this <code>SWActor</code> to display messages
+	 * @param 	world the <code>World</code> to which <code>SWActor</code> belongs to
+	 * 
+	 * @see 	#team
+	 * @see 	#hitpoints
+	 * @see 	#world
+	 * 
+	 * @author asmin1
+	 */
 	public Droid(int hitpoints, String name, MessageRenderer m, SWWorld world) {
 		super(Team.NEUTRAL, 50, m, world);
 		// TODO Auto-generated constructor stub
 		this.name = name;
 		this.setOwner(null);
-		this.addAffordance(new TakeOwnership(this, m));//add the Take affordance so that the blaster can be picked up
+		this.addAffordance(new TakeOwnership(this, m));//add the Take affordance so that the droid can be owner by an actor
 	}
 
 	@Override
@@ -35,12 +50,12 @@ public class Droid extends SWActor {
 			//i think this is sufficient, still. I mentioned that the Droid would be immobile
 			//in my design rationale and this is still true, just different terminology.
 			//i assume there will be more functionality in assignment 3 for this property
-			immobilityMessage();
+			immobilityMessage(); //maybe
 			return;			
 		}
-		checkForBadlands();
+		checkForBadlands(); //droids take damage in the badlands
 		if (this.owner != null){
-			this.say(String.format("now."));
+			this.say(String.format("now.")); //just a test
 			return;
 		}
 		else{
@@ -53,12 +68,10 @@ public class Droid extends SWActor {
 	public String getShortDescription() {
 		return name + " the Droid";
 	}
-
 	@Override
 	public String getLongDescription() {
 		return this.getShortDescription();
 	}
-
 	private String describeLocation() {
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 		return this.getShortDescription() + " [" + this.getHitpoints() + "] is at " + location.getShortDescription();
@@ -67,17 +80,44 @@ public class Droid extends SWActor {
 	private String immobilityMessage() {
 		return (this.getShortDescription() + " is immobile." );
 	}
+	/**
+	 * Method for the <code>Droid</code> class. This method will,
+	 * <ul>
+	 * 	<li>check the location of the <code>Droid</code></li>
+	 * 	<li>damage the <code>Droid</code> by 10 hitpoints if the <code>Droid</code> is in the badlands</li>
+	 * </ul>
+	 * 
+	 * 
+	 * @author asmin1
+	 */
 	public void checkForBadlands() {
 		SWLocation location = this.world.getEntityManager().whereIs(this);
 		if(location.getSymbol() == 'b'){ 
-		    takeDamage(5);
+		    takeDamage(10);
 		}
 }
 
-	
+	/**
+	 * Method for the <code>Droid</code> class. This method will,
+	 * <ul>
+	 * 	<li>return the owner of the <code>Droid</code></li>
+	 * </ul>
+	 * 
+	 * 
+	 * @author asmin1
+	 */
 	public SWActor getOwner() {
 		return owner;
 	}
+	/**
+	 * Method for the <code>Droid</code> class. This method will,
+	 * <ul>
+	 * 	<li>set the owner of the <code>Droid</code></li>
+	 * </ul>
+	 * @param owner <code>SWActor</code>
+	 * 
+	 * @author asmin1
+	 */
 
 	public void setOwner(SWActor owner) {
 		this.owner = owner;

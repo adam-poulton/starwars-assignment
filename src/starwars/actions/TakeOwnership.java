@@ -8,17 +8,12 @@ import starwars.SWEntityInterface;
 import starwars.entities.actors.Droid;
 
 /**
- * <code>SWAction</code> that lets a <code>SWActor</code> pick up an object.
+ * <code>SWAction</code> that lets a <code>SWActor</code> take ownership of a <code>Droid</code>.
  * 
  * @author ram
+ * @author asmin1 (modified 11/5/2018)
  */
-/*
- * Changelog
- * 2017/01/26	- candDo method changed. An actor can only take if it's not holding any items already.
- * 				- act method modified. Take affordance removed from the item picked up, since an item picked up
- * 				  cannot be taken. This is just a safe guard.
- * 				- canDo method changed to return true only if the actor is not carrying an item (asel)
- */
+
 public class TakeOwnership extends SWAffordance {
 
 	/**
@@ -43,8 +38,7 @@ public class TakeOwnership extends SWAffordance {
 	 * @author 	Asel (26/01/2017)
 	 * @author  asmin1 (modified 11/5/2018)
 	 * @param 	a the <code>SWActor</code> being queried
-	 * @return 	true if the <code>SWActor</code> is can take this item, false otherwise
-	 * @see		{@link starwars.SWActor#getItemCarried()}
+	 * @return 	true if the <code>Droid</code> has no owner, false otherwise
 	 */
 	@Override
 	public boolean canDo(SWActor a) {
@@ -54,9 +48,9 @@ public class TakeOwnership extends SWAffordance {
 
 	/**
 	 * Perform the <code>TakeOwnership</code> action by setting the <code>Droid<code>'s owner to the <code>SWActor</code> 
-	 * the <code>SWActor a</code>'s item carried would be the target of this <code>Take</code>).
+	 * the <code>Droid</code>would be the target of this <code>TakeOwership</code>).
 	 * <p>
-	 * This method should only be called if the <code>SWActor a</code> is alive.
+	 * This method should only be called if the target is a <code>Droid</code>.
 	 * 
 	 * @author 	ram
 	 * @author 	Asel (26/01/2017)
@@ -70,7 +64,7 @@ public class TakeOwnership extends SWAffordance {
 		if (target instanceof Droid) {
 			SWEntityInterface theDroid = (SWEntityInterface) target;
 			((Droid) theDroid).setOwner(a);//another cast insta-fix? what's a cast???
-			//remove the take affordance
+			//remove the takeOwnership affordance
 			theDroid.removeAffordance(this);
 		}
 	}

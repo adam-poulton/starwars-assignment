@@ -14,7 +14,7 @@ public class Leave extends SWAffordance {
 	 * Constructor for the <code>Leave</code> Class. Will initialize the message renderer, the target and 
 	 * set the priority of this <code>Action</code> to 1 (lowest priority is 0).
 	 * 
-	 * @param theTarget a <code>SWEntity</code> that is being taken
+	 * @param theTarget a <code>SWEntity</code> that is being left
 	 * @param m the message renderer to display messages
 	 */
 	public Leave(SWEntityInterface theTarget, MessageRenderer m) {
