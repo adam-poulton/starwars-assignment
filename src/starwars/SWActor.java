@@ -319,10 +319,21 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	    this.capabilities.add(c);
     }
 
+	/**
+	 * This method evaluates if this <code>SWActor</code> is currently untrained in, or cannot use the force
+	 *
+	 * @return true if this <code>SWActor</code> is untrained in, or cannot use the force. false otherwise
+	 */
     public boolean isUntrained(){
 		return this.getForce() == null || this.getForce().isUntrained();
 	}
 
+	/**
+	 * This method evaluates if this <code>SWActor</code> is capable of interacting with the force.
+	 *
+	 * @return true if this <code>SWActor</code> is a potential force user (i.e. luke, ben) or false if this
+	 * 	<code>SWActor</code> cannot interact with the force (i.e. droids)
+	 */
 	public boolean canUseForce(){// can use the force - i.e. can be trained in the force
     	return this.getForce() != null;
 	}
