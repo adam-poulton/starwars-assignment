@@ -2,6 +2,7 @@ package starwars.entities.actors;
 
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.SWActor;
 import starwars.SWLegend;
 import starwars.SWWorld;
 import starwars.Team;
@@ -48,15 +49,16 @@ public class BenKenobi extends SWLegend {
 		}
 
 		TrainInformation train;
-		train = TrainNeighbours.trainLocals(ben, ben.world, true);
+		train = TrainNeighbours.trainLocals(ben, ben.world);
 
 		if (train != null) {
-			say(getShortDescription() + " teaches knowledge of lightsabres to " +
+			say(getShortDescription() + " teaches knowledge of lightsabers to " +
 				train.entity.getShortDescription());
 			scheduler.schedule(train.affordance, ben, 1);
+			say("target force ability: " + ((SWActor)train.entity).getForce().getAbility());
 		}
-		
-		AttackInformation attack;
+
+        AttackInformation attack;
 		attack = AttackNeighbours.attackLocals(ben,  ben.world, true, true);
 		
 		if (attack != null) {

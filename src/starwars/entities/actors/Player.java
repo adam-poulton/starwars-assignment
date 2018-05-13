@@ -20,8 +20,9 @@ import static starwars.Force.getLightsaberRequirement;
  * Change log
  * 2017/02/22	Schedule actions in the act method instead of tick. 
  * 				A controller used to get user input rather than the UI directly (Asel)
+ * 2018/05/12
  */
-public class Player extends SWActor implements Trainable {
+public class Player extends SWActor {
 
 	/**
 	 * Constructor for the <code>Player</code> class. This constructor will,
@@ -98,10 +99,4 @@ public class Player extends SWActor implements Trainable {
 		}
 	}
 
-	public void train(){
-		Force toTrain = this.getForce();
-		if (!toTrain.canUseLightSaber()){
-			toTrain.setAbility(getLightsaberRequirement());
-		}
-	}
 }

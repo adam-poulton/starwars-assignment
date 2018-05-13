@@ -26,13 +26,18 @@ import edu.monash.fit2099.simulator.time.Scheduler;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.actions.Attack;
 import starwars.actions.Move;
+import starwars.entities.Trainable;
+
+import static starwars.Force.getLightsaberRequirement;
 /*
  * Changelog
  *
  * 2018-05-04:	added force attribute to support implementation of The Force (adamp)
+ * 2018-05-08:  added instantiation existing 'HashSet<Capability> capabilities' to the default constructor,
+ * 					allows adding capabilities to SWActors
  */
 
-public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface {
+public abstract class SWActor extends Actor<SWActionInterface> implements SWEntityInterface, Trainable {
 	
 	/**the <code>Team</code> to which this <code>SWActor</code> belongs to**/
 	private Team team;
@@ -88,6 +93,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public SWActor(Team team, int hitpoints, MessageRenderer m, SWWorld world) {
 		super(m);
 		actions = new HashSet<SWActionInterface>();
+		capabilities = new HashSet<>();
 		this.team = team;
 		this.hitpoints = hitpoints;
 		this.world = world;
@@ -312,5 +318,18 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	public void addCapability(Capability c){
 	    this.capabilities.add(c);
     }
-	
+
+    public boolean isUntrained(){
+		return this.getForce() == null || this.getForce().isUntrained();
+	}
+
+	public boolean canUseForce(){// can use the force - i.e. can be trained in the force
+    	return this.getForce() != null;
+	}
+
+	public void train(){
+		if (this.isUntrained() && this.canUseForce()) {
+			this.getForce().train();
+		}
+	}
 }

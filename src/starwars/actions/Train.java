@@ -1,7 +1,13 @@
 package starwars.actions;
 
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.*;
+import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.Capability;
+import starwars.SWActionInterface;
+import starwars.SWActor;
+import starwars.SWAffordance;
+import starwars.SWEntityInterface;
+import starwars.Force;
 
 /**
  * <code>SWAction</code> that lets a <code>SWActor</code> train another <code>SWActor</code> in the force.
@@ -20,7 +26,7 @@ public class Train extends SWAffordance implements SWActionInterface {
 
     @Override
     public String getDescription() {
-        return "";
+        return "train " + this.target.getShortDescription();
     }
 
     @Override
@@ -38,18 +44,31 @@ public class Train extends SWAffordance implements SWActionInterface {
      *
      * @author 	adamp
      * @param 	a the <code>SWActor</code> being checked
-     * @return 	true if the <code>SWActor</code> can always try an attack,
+     * @return 	true
      */
     @Override
     public boolean canDo(SWActor a) {
-        return false;
+        return true;  //TODO: does this matter?
     }
 
     @Override
     public void act(SWActor a) {
         SWEntityInterface target = this.getTarget();
         boolean targetIsActor = target instanceof SWActor;
-        SWActor targetActor = null;
-        assert(this.getTarget().hasCapability(Capability.TRAINABLE)):"Target does not have trainable capability";
+        SWActor targetActor;
+
+        if (targetIsActor) {
+            targetActor = (SWActor) target;
+            if (targetActor.isUntrained() && targetActor.canUseForce()){
+                targetActor.train();
+            }
+        }
+
+
+
+
+
+
+
     }
 }

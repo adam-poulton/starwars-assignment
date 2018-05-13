@@ -54,6 +54,22 @@ public class Force {
     }
 
     /**
+     * Method evaluates if this <code>force</code> is untrained. i.e possesses an <code>ability</code> value of 0 or less
+     *
+     * @return true if untrained, false otherwise
+     */
+    public boolean isUntrained() {
+        return this.getAbility() <= 0;
+    }
+
+    public void train() {
+        if (this.isUntrained()) {
+            setAbility(LIGHTSABER_REQUIREMENT);
+        }
+    }
+
+
+    /**
      * Method evaluates if the current state of <code>Force</code> permits wielding a lightsaber.
      *
      * @return true if <code>Force</code> permits wielding a lightsaber, false if it does not.
