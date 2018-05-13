@@ -60,6 +60,7 @@ public class SWLocation extends Location {
 		neighbours = new HashMap<Direction, Location>();
 	}
 	
+	
 	/** 
 	 * A factory of a factory.
 	 * Makes the <code>SWLocationMaker</code> which has a <code>make()</code> method that makes the <code>SWLocation</code>
