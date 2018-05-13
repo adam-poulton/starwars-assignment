@@ -1,21 +1,13 @@
 package starwars.entities.actors;
 
-import java.util.ArrayList;
-
-import edu.monash.fit2099.gridworld.Grid;
 import edu.monash.fit2099.gridworld.Grid.CompassBearing;
-import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
-import starwars.SWAction;
 import starwars.SWActor;
 import starwars.SWLocation;
 import starwars.SWWorld;
 import starwars.Team;
 import starwars.actions.Move;
-import starwars.actions.Take;
 import starwars.actions.TakeOwnership;
-import starwars.entities.actors.behaviors.AttackInformation;
-import starwars.entities.actors.behaviors.AttackNeighbours;
 import starwars.entities.actors.behaviors.Follow;
 
 
@@ -63,12 +55,13 @@ public class Droid extends SWActor {
 				return;
 			}
 			else{
+				//bit of TuskenRaider code
 				Move myMove = new Move(d, messageRenderer, world);
 				scheduler.schedule(myMove, this, 1);
 			}
 		}
 		else{
-			return;
+			return; //no new move? why not stand still!
 		}
 
 	}
