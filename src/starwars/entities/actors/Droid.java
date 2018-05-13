@@ -3,6 +3,7 @@ package starwars.entities.actors;
 import java.util.ArrayList;
 
 import edu.monash.fit2099.gridworld.Grid;
+import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.SWAction;
@@ -15,6 +16,8 @@ import starwars.actions.Take;
 import starwars.actions.TakeOwnership;
 import starwars.entities.actors.behaviors.AttackInformation;
 import starwars.entities.actors.behaviors.AttackNeighbours;
+import starwars.entities.actors.behaviors.Follow;
+
 
 public class Droid extends SWActor {
 
@@ -55,8 +58,14 @@ public class Droid extends SWActor {
 		}
 		checkForBadlands(); //droids take damage in the badlands
 		if (this.owner != null){
-			this.say(String.format("now.")); //just a test
-			return;
+			CompassBearing d = Follow.Follow(this.owner, this, world);
+			if (d == null){
+				return;
+			}
+			else{
+				Move myMove = new Move(d, messageRenderer, world);
+				scheduler.schedule(myMove, this, 1);
+			}
 		}
 		else{
 			return;
