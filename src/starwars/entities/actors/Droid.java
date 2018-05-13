@@ -29,7 +29,7 @@ public class Droid extends SWActor {
 	 * @see 	#hitpoints
 	 * @see 	#world
 	 * 
-	 * @author asmin1
+	 * @author asmin1 (modified from various SWActors 11/5/2018-13/5/2018)
 	 */
 	public Droid(int hitpoints, String name, MessageRenderer m, SWWorld world) {
 		super(Team.NEUTRAL, 50, m, world);
@@ -38,7 +38,14 @@ public class Droid extends SWActor {
 		this.setOwner(null);
 		this.addAffordance(new TakeOwnership(this, m));//add the Take affordance so that the droid can be owner by an actor
 	}
-
+	/**
+	 * This method will describe this <code>Droid</code>'s role in the SWWorld.
+	 * <p>
+	 * This method will check the location of the <code>Droid</code> for damagge penalties. 
+	 * Check for a <code>Droid</code>'s owner to initiate the <code>Follow</code> behaviour and determine the next move (if any)
+	 * 
+	 *@author asmin1
+	 */
 	@Override
 	public void act() {
 		if (isDead()) {
@@ -57,7 +64,7 @@ public class Droid extends SWActor {
 			else{
 				//bit of TuskenRaider code
 				Move myMove = new Move(d, messageRenderer, world);
-				scheduler.schedule(myMove, this, 1);
+				scheduler.schedule(myMove, this, 1);  	//Schedule the new move
 			}
 		}
 		else{
