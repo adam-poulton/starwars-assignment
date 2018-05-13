@@ -119,7 +119,7 @@ public class Attack extends SWAffordance implements SWActionInterface {
 				
 				//quick implementation of lightsaber requirement
 				//adamp - 09/05/18
-				if (itemCarried instanceof LightSaber && !a.getForce().canUseLightSaber()){//the actor is holding a lightsaber but does not meet requirements to attack with it
+				if (itemCarried instanceof LightSaber && a.isUntrained()){//the actor is holding a lightsaber but does not meet requirements to attack with it
 					a.say(a.getShortDescription() + " has not been trained to use a " + itemCarried.getShortDescription());
 				}
 				
