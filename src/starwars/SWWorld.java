@@ -1,5 +1,10 @@
 package starwars;
 
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.matter.EntityManager;
 import edu.monash.fit2099.simulator.space.Direction;
@@ -42,6 +47,8 @@ public class SWWorld extends World {
 		space = myGrid;
 		
 	}
+	
+	
 
 	/** 
 	 * Returns the height of the <code>Grid</code>. Useful to the Views when rendering the map.
@@ -114,22 +121,42 @@ public class SWWorld extends World {
 		
 		loc = myGrid.getLocationByCoordinates(5,9);
 		
-		// Luke
-		Player luke = new Player(Team.GOOD, 100, iface, this);
-		luke.setShortDescription("Luke");
-		entityManager.setLocation(luke, loc);
-		luke.resetMoveCommands(loc);
-		luke.setForce(new Force());
-		luke.addCapability(Capability.TRAINABLE);
-		luke.addAffordance(new Train(luke, iface));
 		
-		loc = myGrid.getLocationByCoordinates(4,9);
-		Player alex = new Player(Team.GOOD, 100, iface, this);
-		alex.setShortDescription("Alex");
-		entityManager.setLocation(alex, loc);
-		alex.resetMoveCommands(loc);
-		alex.setSymbol("A");
-
+		// Luke
+		//Player luke = new Player(Team.GOOD, 100, iface, this);
+		//luke.setShortDescription("Luke");
+		//entityManager.setLocation(luke, loc);
+		//luke.resetMoveCommands(loc);
+		//luke.setForce(new Force());
+		//luke.addCapability(Capability.TRAINABLE);
+		//luke.addAffordance(new Train(luke, iface));
+		
+		
+		//2 player game!!!
+		
+		loc = myGrid.getLocationByCoordinates(0,0);
+		
+		Player playerOne = new Player(Team.GOOD, 100, iface, this);
+		playerOne.setShortDescription("Player One");
+		entityManager.setLocation(playerOne, loc);
+		playerOne.resetMoveCommands(loc);
+		playerOne.setSymbol(readString("Enter Player One's symbol: "));
+		playerOne.setForce(new Force());
+		playerOne.addCapability(Capability.TRAINABLE);
+		playerOne.addAffordance(new Train(playerOne, iface));
+		
+		loc = myGrid.getLocationByCoordinates(9,9);
+		
+		Player playerTwo = new Player(Team.GOOD, 100, iface, this);
+		playerTwo.setShortDescription("Player Two");
+		entityManager.setLocation(playerTwo, loc);
+		playerTwo.resetMoveCommands(loc);
+		playerTwo.setSymbol(readString("Enter Player Two's symbol: "));
+		playerTwo.setForce(new Force());
+		playerTwo.addCapability(Capability.TRAINABLE);
+		playerTwo.addAffordance(new Train(playerTwo, iface));
+		
+		
 		
 		// Beggar's Canyon 
 		for (int col = 3; col < 8; col++) {
@@ -277,4 +304,17 @@ public class SWWorld extends World {
 	public static EntityManager<SWEntityInterface, SWLocation> getEntitymanager() {
 		return entityManager;
 	}
+	
+	private String readString(String prompt) {
+		System.out.print(prompt);
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in)
+		);
+		String s = null;
+		try {
+			s = in.readLine();
+		} catch (IOException e) {
+		e.printStackTrace();
+		 }
+		return s;
+		 }
 }
