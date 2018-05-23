@@ -122,6 +122,13 @@ public class SWWorld extends World {
 		luke.setForce(new Force());
 		luke.addCapability(Capability.TRAINABLE);
 		luke.addAffordance(new Train(luke, iface));
+		
+		loc = myGrid.getLocationByCoordinates(4,9);
+		Player alex = new Player(Team.GOOD, 100, iface, this);
+		alex.setShortDescription("Alex");
+		entityManager.setLocation(alex, loc);
+		alex.resetMoveCommands(loc);
+		alex.setSymbol("A");
 
 		
 		// Beggar's Canyon 
