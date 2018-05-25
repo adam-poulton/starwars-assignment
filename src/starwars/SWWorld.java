@@ -213,6 +213,16 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(3, 4);
 		entityManager.setLocation(blaster, loc);
 		
+		// A grenade 
+		Grenade grenade = new Grenade(iface);
+		loc = myGrid.getLocationByCoordinates(2, 1);
+		entityManager.setLocation(grenade, loc);
+		
+		// A grenade 
+		Grenade grenade2 = new Grenade(iface);
+		loc = myGrid.getLocationByCoordinates(8, 8);
+		entityManager.setLocation(grenade2, loc);
+		
 		// A Tusken Raider
 		TuskenRaider tim = new TuskenRaider(10, "Tim", iface, this);
 		tim.setSymbol("T");
