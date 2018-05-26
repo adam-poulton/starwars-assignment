@@ -12,6 +12,7 @@ import starwars.SWAction;
 import starwars.SWActor;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
+import starwars.SWLocation;
 import starwars.SWWorld;
 import edu.monash.fit2099.simulator.space.Location;
 
@@ -106,13 +107,67 @@ public class Throw extends SWAffordance{
 		
 		
 		for (SWEntityInterface e: SWWorld.getEntitymanager().contents(SWAction.getEntitymanager().whereIs(a))){
-			e.takeDamage(1000);
+			if (e != a){    			//luke isn't affected by the grenade
+				e.takeDamage(20); 		//entities within the location lose 20 points
+			}
 		}
 		
 		//ArrayList<Direction> possibledirections = new ArrayList<Direction>();
 
+		for (Grid.CompassBearing d : Grid.CompassBearing.values()) {
+			if (SWWorld.getEntitymanager().seesExit(a, d)) {
+				SWLocation location = (SWLocation) SWWorld.getEntitymanager().whereIs(a).getNeighbour(d);
+				a.takeDamage(1);
+				a.say("bitty i'm up to here!1");
+				//Location y = SWWorld.getEntitymanager().whereIs(a).getNeighbour(d);
+				//List<SWEntityInterface> contents = SWWorld.getEntitymanager().contents(location);
+
+				//List x = SWWorld.getEntitymanager().contents(SWAction.getEntitymanager().whereIs(a));
+				//if (y!=null){
+				if (canLoopList(SWWorld.getEntitymanager().contents(location))) {
+				    for(SWEntityInterface e: SWWorld.getEntitymanager().contents(location)) {
+				    	if (e != a){    			//luke isn't affected by the grenade
+							e.takeDamage(20); 		//entities within the location lose 20 points
+						}
+				}
+				}
+//				for (SWEntityInterface e: SWWorld.getEntitymanager().contents(location)){
+//					String string4 = String.format("A string %s", location);
+//					a.say(string4);
+//					a.say("e: ");
+//					String string = String.format("A string %s", e);
+//					String string2 = String.format("A string %s", e.getHitpoints());
+//					a.say(string);
+//					a.say(string2);;
+//					if (e != a){    			//luke isn't affected by the grenade
+//						e.takeDamage(20); 		//entities within the location lose 20 points
+//					}
+//					String string3 = String.format("A string %s", e.getHitpoints());
+//					a.say(string3);;
+//				}
+				//}
+				//for (SWEntityInterface e: SWWorld.getEntitymanager().contents( SWAction.getEntitymanager().whereIs(a).getNeighbour(d))){
+				
+			}
+		}
 		
-		//for (Grid.CompassBearing d : Grid.CompassBearing.values()) { 
+		
+		
+		
+		
+		//for (Direction d : possibledirections) {
+		//	Location x = SWAction.getEntitymanager().whereIs(a);
+		//	for (SWEntityInterface e: SWWorld.getEntitymanager().contents(x.getNeighbour(d))){
+		//		e.takeDamage(10);		//Entities in locations that can be reached in one step from the location where the grenade is thrown lose 10 points
+		//	}
+			
+		//}
+
+//		
+		//ArrayList<Direction> possibledirections = new ArrayList<Direction>();
+		//SWAction.getEntitymanager().whereIs(a).getNeighbour(NORTH)
+		
+	//	for (Location d : SWAction.getEntitymanager().getNeighbour(whereIs(a)) ) { 
 			//if (SWWorld.getEntitymanager().seesExit(a, d)){
 				
 				
@@ -166,6 +221,12 @@ public class Throw extends SWAffordance{
 
 		//remove leave affordance, add take affordance
 		
+	}
+	public static boolean canLoopList(List<?> list) {
+	    if (list != null && !list.isEmpty()) {
+	        return true;
+	    }
+	    return false;
 	}
 }
 
