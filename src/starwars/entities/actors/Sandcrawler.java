@@ -50,6 +50,16 @@ public class Sandcrawler extends SWActor implements Enterable{
         assert internalHeight > 0:"height must be positive";
         assert internalWidth > 0:"width must be positive";
 
+        Direction [] patrolmoves = {CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.SOUTH,
+                CompassBearing.WEST, CompassBearing.WEST,
+                CompassBearing.SOUTH,
+                CompassBearing.EAST, CompassBearing.EAST,
+                CompassBearing.NORTHWEST, CompassBearing.NORTHWEST};
+
+        this.path = new Patrol(patrolmoves);
+        this.setShortDescription("Sandcrawler");
+        this.setLongDescription("Sandcrawler, loved by all.");
         this.name = name;
         this.addAffordance(new Enter(this, m));
         SWLocation.SWLocationMaker factory = SWLocation.getMaker();
@@ -95,6 +105,11 @@ public class Sandcrawler extends SWActor implements Enterable{
 
     public void engulf(SWEntityInterface theTarget){
         SWLocation loc = internalGrid.getLocationByCoordinates(0, 0);
+        SWWorld.getEntitymanager().setLocation(theTarget, loc);
+    }
+
+    public void spitOut(SWEntityInterface theTarget){
+        SWLocation loc = world.getEntityManager().whereIs(this);
         SWWorld.getEntitymanager().setLocation(theTarget, loc);
     }
 }

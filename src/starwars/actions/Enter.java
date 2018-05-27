@@ -5,6 +5,7 @@ import starwars.SWActionInterface;
 import starwars.SWActor;
 import starwars.SWAffordance;
 import starwars.SWEntityInterface;
+import starwars.entities.actors.Sandcrawler;
 
 /**
  * <code>SWAction</code> that lets a <code>SWActor</code> enter another <code>SWActor</code>..
@@ -19,6 +20,7 @@ public class Enter extends SWAffordance implements SWActionInterface {
 
     public Enter(SWActor theTarget, MessageRenderer m) {
         super(theTarget, m);
+        SWActor destination = theTarget;
     }
 
     @Override
@@ -50,6 +52,15 @@ public class Enter extends SWAffordance implements SWActionInterface {
 
     @Override
     public void act(SWActor a) {
+        //TODO: de-spaghetti (probs not tho, its tasty)
+        SWEntityInterface target = this.getTarget();
+        boolean targetIsSandcrawler = target instanceof Sandcrawler;
+        Sandcrawler targetSandcrawler;
+
+        if (targetIsSandcrawler) {
+            targetSandcrawler = (Sandcrawler) target;
+            targetSandcrawler.engulf(a);
+        }
 
     }
 

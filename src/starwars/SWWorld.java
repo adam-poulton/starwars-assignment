@@ -187,7 +187,7 @@ public class SWWorld extends World {
 		// a canteen
 		loc = myGrid.getLocationByCoordinates(3,1);
 		SWEntity canteen = new Canteen(iface, 10,0);
-		canteen.setSymbol("©");
+		canteen.setSymbol("ï¿½");
 		canteen.setHitpoints(500);
 		entityManager.setLocation(canteen, loc);
 		canteen.addAffordance(new Take(canteen, iface));
@@ -258,7 +258,14 @@ public class SWWorld extends World {
 		Droid gronk11 = new Droid(10, "gronk", iface, this);
 		gronk11.setSymbol("D");
 		loc = myGrid.getLocationByCoordinates(8,6);
-		entityManager.setLocation(gronk11, loc);		
+		entityManager.setLocation(gronk11, loc);
+
+		//sandy bois
+		Sandcrawler betty = new Sandcrawler(1000, "Betty", iface, this,
+				2, 2);
+		betty.setSymbol("&");
+		loc = myGrid.getLocationByCoordinates(3,3);
+		entityManager.setLocation(betty, loc);
 
 	}
 
