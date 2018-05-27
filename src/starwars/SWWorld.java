@@ -10,6 +10,8 @@ import edu.monash.fit2099.simulator.space.Direction;
 import edu.monash.fit2099.simulator.space.Location;
 import edu.monash.fit2099.simulator.space.World;
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
+import starwars.actions.Enter;
+import starwars.actions.Exit;
 import starwars.actions.Take;
 import starwars.actions.Train;
 import starwars.entities.*;
@@ -240,6 +242,9 @@ public class SWWorld extends World {
 		betty.setSymbol("&");
 		loc = myGrid.getLocationByCoordinates(3,3);
 		entityManager.setLocation(betty, loc);
+		Door door = new Door(iface);
+		entityManager.setLocation(door, betty.getInternalGrid().getLocationByCoordinates(0,0));
+		door.addAffordance(new Exit(betty, iface));
 
 	}
 

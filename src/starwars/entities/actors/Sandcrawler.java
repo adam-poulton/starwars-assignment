@@ -112,4 +112,8 @@ public class Sandcrawler extends SWActor implements Enterable{
         SWLocation loc = world.getEntityManager().whereIs(this);
         SWWorld.getEntitymanager().setLocation(theTarget, loc);
     }
+
+    public SWGrid getInternalGrid(){
+        return internalGrid;
+    }
 }
