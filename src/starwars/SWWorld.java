@@ -235,11 +235,31 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(5,4);
 		entityManager.setLocation(C3PO, loc);
 		
-		// A test Droid for grenade 
+		// A test Droid for grenade 10pt
 		Droid gronk = new Droid(10, "gronk", iface, this);
 		gronk.setSymbol("D");
 		loc = myGrid.getLocationByCoordinates(8,7);
 		entityManager.setLocation(gronk, loc);
+		
+		// A test Droid for grenade 5pt 
+		Droid gronk1 = new Droid(10, "gronk", iface, this);
+		gronk1.setSymbol("D");
+		loc = myGrid.getLocationByCoordinates(8,6);
+		entityManager.setLocation(gronk1, loc);
+
+		
+		// A test Droid for grenade 10pt
+		Droid gronk3 = new Droid(10, "gronk", iface, this);
+		gronk3.setSymbol("D");
+		loc = myGrid.getLocationByCoordinates(9,6);
+		entityManager.setLocation(gronk3, loc);
+
+		// A test Droid for grenade 5pt 
+		Droid gronk11 = new Droid(10, "gronk", iface, this);
+		gronk11.setSymbol("D");
+		loc = myGrid.getLocationByCoordinates(8,6);
+		entityManager.setLocation(gronk11, loc);		
+
 	}
 
 	/*

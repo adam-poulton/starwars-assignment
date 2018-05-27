@@ -112,42 +112,33 @@ public class Throw extends SWAffordance{
 			}
 		}
 		
-		//ArrayList<Direction> possibledirections = new ArrayList<Direction>();
 
 		for (Grid.CompassBearing d : Grid.CompassBearing.values()) {
 			if (SWWorld.getEntitymanager().seesExit(a, d)) {
-				SWLocation location = (SWLocation) SWWorld.getEntitymanager().whereIs(a).getNeighbour(d);
-				a.takeDamage(1);
-				a.say("bitty i'm up to here!1");
-				//Location y = SWWorld.getEntitymanager().whereIs(a).getNeighbour(d);
-				//List<SWEntityInterface> contents = SWWorld.getEntitymanager().contents(location);
-
-				//List x = SWWorld.getEntitymanager().contents(SWAction.getEntitymanager().whereIs(a));
-				//if (y!=null){
-				if (canLoopList(SWWorld.getEntitymanager().contents(location))) {
-				    for(SWEntityInterface e: SWWorld.getEntitymanager().contents(location)) {
+				SWLocation neighb = (SWLocation) SWWorld.getEntitymanager().whereIs(a).getNeighbour(d);
+				if (canLoopList(SWWorld.getEntitymanager().contents(neighb))) {
+				    for(SWEntityInterface e: SWWorld.getEntitymanager().contents(neighb)) {
 				    	if (e != a){    			//luke isn't affected by the grenade
-							e.takeDamage(20); 		//entities within the location lose 20 points
+							e.takeDamage(10); 		//entities within the neighboring locations lose 10 points
 						}
+				    }
+				    if (canLoopList(SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d)))){
+				    	for(SWEntityInterface e: SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d))) {
+					    	a.say("i'm in the neighoburing one!");
+				    		if (e != a){    			//luke isn't affected by the grenade
+								e.takeDamage(5); 		//entities within the neighboring's enighboring location loses 5 points
+							}
+				    	}	
+				    }
+				    if (canLoopList(SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d.turn(45))))){
+				    	for(SWEntityInterface e: SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d.turn(45)))) {
+					    	a.say("i'm in the neighoburing 45 angle one!");
+				    		if (e != a){    			//luke isn't affected by the grenade
+								e.takeDamage(5); 		//entities within the neighboring's enighboring location loses 5 points
+							}
+				    	}
+				    }
 				}
-				}
-//				for (SWEntityInterface e: SWWorld.getEntitymanager().contents(location)){
-//					String string4 = String.format("A string %s", location);
-//					a.say(string4);
-//					a.say("e: ");
-//					String string = String.format("A string %s", e);
-//					String string2 = String.format("A string %s", e.getHitpoints());
-//					a.say(string);
-//					a.say(string2);;
-//					if (e != a){    			//luke isn't affected by the grenade
-//						e.takeDamage(20); 		//entities within the location lose 20 points
-//					}
-//					String string3 = String.format("A string %s", e.getHitpoints());
-//					a.say(string3);;
-//				}
-				//}
-				//for (SWEntityInterface e: SWWorld.getEntitymanager().contents( SWAction.getEntitymanager().whereIs(a).getNeighbour(d))){
-				
 			}
 		}
 		
