@@ -65,7 +65,7 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 
 	/**
 	 * Defines the proficiency this <code>SWActor</code> has with the force.
-	 * <code>force</code> is null if this <code>SWActor</code> cannot interfac to use the force.
+	 * <code>force</code> is null if this <code>SWActor</code> cannot use the force.
 	 */
 	private Force force;
 	
