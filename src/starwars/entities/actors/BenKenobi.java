@@ -8,7 +8,7 @@ import starwars.entities.LightSaber;
 import starwars.entities.actors.behaviors.*;
 
 /**
- * Ben (aka Obe-Wan) Kenobi.  
+ * Ben (aka Obi-Wan) Kenobi.
  * 
  * At this stage, he's an extremely strong critter with a <code>Lightsaber</code>
  * who wanders around in a fixed pattern and neatly slices any Actor not on his

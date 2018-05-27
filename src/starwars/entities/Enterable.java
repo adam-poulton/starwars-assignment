@@ -1,7 +1,7 @@
 package starwars.entities;
 
 
-import starwars.SWActor;
+import starwars.SWEntityInterface;
 
 /**
  * Interface for SWEntities that can be entered
@@ -11,5 +11,5 @@ import starwars.SWActor;
  * @see {@link starwars.Capability}
  */
 public interface Enterable {
-    void engulf(SWActor theTarget);
+    void engulf(SWEntityInterface theTarget);
 }
