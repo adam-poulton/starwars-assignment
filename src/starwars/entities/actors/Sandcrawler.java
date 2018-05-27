@@ -77,6 +77,11 @@ public class Sandcrawler extends SWActor implements Enterable{
         }
     }
 
+    /**
+     * Methods handles the movement of the sandcrawler and also its diet of droids
+     * Sandcrawler will poll current location for droids, eating all that it finds
+     * @author adamp 27/05/18
+     */
     public void act(){
         if(!isDead()) {
             SWLocation location = world.getEntityManager().whereIs(this);
@@ -103,16 +108,32 @@ public class Sandcrawler extends SWActor implements Enterable{
 
     }
 
+    /**
+     * Method lets <code>Sandcrawler</code> to 'engulf' the target <code>SWActor</code> by changing its location to
+     * a location that is 'inside' the <code>Sandcrawler</code>
+     * @param theTarget the SWActor that the <code>Sandcrawler</code> is eating
+     */
     public void engulf(SWEntityInterface theTarget){
         SWLocation loc = internalGrid.getLocationByCoordinates(0, 0);
         SWWorld.getEntitymanager().setLocation(theTarget, loc);
     }
 
+    /**
+     * Methods lets <code>Sandcrawler</code> to 'spit out' the target <code>SWActor</code> by changing its location to
+     * the location that the <code>Sandcrawler</code> is currently occupying
+     * @param theTarget
+     * @author adamp 27/05/18
+     */
     public void spitOut(SWEntityInterface theTarget){
         SWLocation loc = world.getEntityManager().whereIs(this);
         SWWorld.getEntitymanager().setLocation(theTarget, loc);
     }
 
+    /**
+     *
+     * @return the <code>SWGrid</code> representing the inside of the <code>Sandcrawler</code>
+     * @author adamp 27/05/18
+     */
     public SWGrid getInternalGrid(){
         return internalGrid;
     }

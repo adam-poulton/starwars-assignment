@@ -135,7 +135,7 @@ public class SWWorld extends World {
 		
 		//2 player game!!!
 		
-		loc = myGrid.getLocationByCoordinates(0,0);
+		loc = myGrid.getLocationByCoordinates(3,3);
 		
 		Player playerOne = new Player(Team.GOOD, 100, iface, this);
 		playerOne.setShortDescription("Player One");
