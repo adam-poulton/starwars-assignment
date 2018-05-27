@@ -1,7 +1,6 @@
 package starwars;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -234,31 +233,6 @@ public class SWWorld extends World {
 		C3PO.setSymbol("D");
 		loc = myGrid.getLocationByCoordinates(5,4);
 		entityManager.setLocation(C3PO, loc);
-		
-		// A test Droid for grenade 10pt
-		Droid gronk = new Droid(10, "gronk", iface, this);
-		gronk.setSymbol("D");
-		loc = myGrid.getLocationByCoordinates(8,7);
-		entityManager.setLocation(gronk, loc);
-		
-		// A test Droid for grenade 5pt 
-		Droid gronk1 = new Droid(10, "gronk", iface, this);
-		gronk1.setSymbol("D");
-		loc = myGrid.getLocationByCoordinates(8,6);
-		entityManager.setLocation(gronk1, loc);
-
-		
-		// A test Droid for grenade 10pt
-		Droid gronk3 = new Droid(10, "gronk", iface, this);
-		gronk3.setSymbol("D");
-		loc = myGrid.getLocationByCoordinates(9,6);
-		entityManager.setLocation(gronk3, loc);
-
-		// A test Droid for grenade 5pt 
-		Droid gronk11 = new Droid(10, "gronk", iface, this);
-		gronk11.setSymbol("D");
-		loc = myGrid.getLocationByCoordinates(8,6);
-		entityManager.setLocation(gronk11, loc);
 
 		//sandy bois
 		Sandcrawler betty = new Sandcrawler(1000, "Betty", iface, this,

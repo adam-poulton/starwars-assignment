@@ -1,11 +1,9 @@
 package starwars.actions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.monash.fit2099.gridworld.Grid;
-import edu.monash.fit2099.gridworld.Grid.CompassBearing;
-import edu.monash.fit2099.simulator.space.Direction;
+
 import edu.monash.fit2099.simulator.userInterface.MessageRenderer;
 import starwars.Capability;
 import starwars.SWAction;
@@ -14,7 +12,6 @@ import starwars.SWAffordance;
 import starwars.SWEntityInterface;
 import starwars.SWLocation;
 import starwars.SWWorld;
-import edu.monash.fit2099.simulator.space.Location;
 
 
 /**
@@ -23,12 +20,9 @@ import edu.monash.fit2099.simulator.space.Location;
  * This affordance is attached to all thowable entities
  * 
  * @author David.Squire@monash.edu (dsquire)
+ * @author asmin1 modified from various (26/5/2018)
  */
-/*
- * Change log
- * 2017/02/03	Fixed the bug where the an actor could attack another actor in the same team (asel)
- * 2017/02/08	Attack given a priority of 1 in constructor (asel)
- */
+
 public class Throw extends SWAffordance{
 
 	
@@ -72,154 +66,73 @@ public class Throw extends SWAffordance{
 	 * 
 	 * @author 	dsquire
 	 * @param 	a the <code>SWActor</code> being queried
-	 * @return 	true any <code>SWActor</code> can always try an attack, it just won't do much 
-	 * 			good unless this <code>SWActor a</code> has a suitable weapon.
+	 * @return 	true if the item carried by <code>SWActor</code> has the THROWABLE afforance  
+	 * @return  false otherwise
+	 * 			
 	 */
 	@Override
 	public boolean canDo(SWActor a) {
-		//from Dip
+		//reformed from Dip
 		SWEntityInterface item = a.getItemCarried();
 		if (item!= null) {
-			return item.hasCapability(Capability.THROWABLE);
+			return item.hasCapability(Capability.THROWABLE);  //just wanna make sure that the item is throwable 
 		}
-		return false;
+		return false;  //otherwise this action can't be performed
 	}
 
 	
 	/**
 	 * Perform the <code>Throw</code> command on an entity.
 	 * <p>
-	 * ***
+	 * 	<li>Entities in the location where the grenade is thrown lose 20 hitpoints. </li>
+	 * <li>Entities in locations that can be reached in one step from the location where the grenade is thrown lose 10 points.</li>
+	 * <li>Entities in locations that can be reached in two steps from the location where the grenade is thrown lose 5 points</li>
 	 * <p>
 	 * 
 	 * 
 	 * @author 	dsquire -  adapted from the equivalent class in the old Eiffel version
 	 * @author 	Asel - bug fixes.
 	 * @param 	a the <code>SWActor</code> who is attacking
-	 * @pre 	this method should only be called if the <code>SWActor a</code> is alive
-	 * @pre		an <code>Attack</code> must not be performed on a dead <code>SWActor</code>
-	 * @post	if a <code>SWActor</code>dies in an <code>Attack</code> their <code>Attack</code> affordance would be removed
-	 * @see		starwars.SWActor#isDead()
-	 * @see 	starwars.Team
 	 */
 	@Override
-	public void act(SWActor a) {
-		
-		
+	public void act(SWActor a) {	
+		//Entities in the location where the grenade is thrown lose 20 hitpoints
 		for (SWEntityInterface e: SWWorld.getEntitymanager().contents(SWAction.getEntitymanager().whereIs(a))){
-			if (e != a){    			//luke isn't affected by the grenade
+			if (e != a){    			//The actor that throws the grenade is not affected.
 				e.takeDamage(20); 		//entities within the location lose 20 points
 			}
 		}
-		
-
-		for (Grid.CompassBearing d : Grid.CompassBearing.values()) {
+		for (Grid.CompassBearing d : Grid.CompassBearing.values()) {  //going through the possible directions
 			if (SWWorld.getEntitymanager().seesExit(a, d)) {
 				SWLocation neighb = (SWLocation) SWWorld.getEntitymanager().whereIs(a).getNeighbour(d);
-				if (canLoopList(SWWorld.getEntitymanager().contents(neighb))) {
+				if (SWWorld.getEntitymanager().contents(neighb)!= null) {
+					
+					//Entities in locations that can be reached in one step from the location where the grenade is thrown lose 10 points.
 				    for(SWEntityInterface e: SWWorld.getEntitymanager().contents(neighb)) {
-				    	if (e != a){    			//luke isn't affected by the grenade
-							e.takeDamage(10); 		//entities within the neighboring locations lose 10 points
-						}
+						e.takeDamage(10); 		
 				    }
-				    if (canLoopList(SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d)))){
+				    //Entities in locations that can be reached in two steps from the location where the grenade is thrown lose 5 points.
+				    if (SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d))!= null){
 				    	for(SWEntityInterface e: SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d))) {
-					    	a.say("i'm in the neighoburing one!");
-				    		if (e != a){    			//luke isn't affected by the grenade
-								e.takeDamage(5); 		//entities within the neighboring's enighboring location loses 5 points
-							}
+							e.takeDamage(5); 		
 				    	}	
 				    }
-				    if (canLoopList(SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d.turn(45))))){
+				    //Entities in locations that can be reached in two steps from the location where the grenade is thrown lose 5 points.
+				    //These positions are a knight's move away from the actor
+				    if (SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d.turn(45)))!= null){
 				    	for(SWEntityInterface e: SWWorld.getEntitymanager().contents((SWLocation) neighb.getNeighbour(d.turn(45)))) {
-					    	a.say("i'm in the neighoburing 45 angle one!");
-				    		if (e != a){    			//luke isn't affected by the grenade
-								e.takeDamage(5); 		//entities within the neighboring's enighboring location loses 5 points
-							}
+							e.takeDamage(5); 		
 				    	}
 				    }
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		//for (Direction d : possibledirections) {
-		//	Location x = SWAction.getEntitymanager().whereIs(a);
-		//	for (SWEntityInterface e: SWWorld.getEntitymanager().contents(x.getNeighbour(d))){
-		//		e.takeDamage(10);		//Entities in locations that can be reached in one step from the location where the grenade is thrown lose 10 points
-		//	}
-			
-		//}
-
-//		
-		//ArrayList<Direction> possibledirections = new ArrayList<Direction>();
-		//SWAction.getEntitymanager().whereIs(a).getNeighbour(NORTH)
-		
-	//	for (Location d : SWAction.getEntitymanager().getNeighbour(whereIs(a)) ) { 
-			//if (SWWorld.getEntitymanager().seesExit(a, d)){
-				
-				
-	//		}
-	//		possibledirections.add(d);
-	//		}
-		
-		
-		
-		
-		
-//		SWEntityInterface target = this.getTarget();
-//		boolean targetIsActor = target instanceof SWActor;
-//		SWActor targetActor = null;
-//		
-//		if (targetIsActor) {
-//			targetActor = (SWActor) target;
-//		}
-//					
-//		
-//		if (targetIsActor && (a.getTeam() == targetActor.getTeam())) { //don't attack SWActors in the same team
-//			a.say("\t" + a.getShortDescription() + " says: Silly me! We're on the same team, " + target.getShortDescription() + ". No harm done");
-//		}
-//		else if (a.isHumanControlled() // a human-controlled player can attack anyone
-//			|| (targetIsActor && (a.getTeam() != targetActor.getTeam()))) {  // others will only attack actors on different teams
-//				
-//			a.say(a.getShortDescription() + " is attacking " + target.getShortDescription() + "!");
-//			
-//			SWEntityInterface itemCarried = a.getItemCarried();
-//			
-//			}
-//			
-//			
-//			
-//			
-//			
-//				
-//				
-//			
-//			if (this.getTarget().getHitpoints() <= 0) {  // can't use isDead(), as we don't know that the target is an actor
-//				target.setLongDescription(target.getLongDescription() + ", that was killed in a fight");
-//							
-//			
-
-				
-			
-		//} 
-		a.setItemCarried(null);
-		target.addAffordance(new Take((SWEntityInterface) target, this.messageRenderer)); 
-		target.removeAffordance(new Leave((SWEntityInterface) target, this.messageRenderer)); //this might not be right
-
+		a.setItemCarried(null);  //remove any remnants of the grenade to cover ;After a grenade is thrown, it is completely destroyed and disappears. 
 		//remove leave affordance, add take affordance
-		
-	}
-	public static boolean canLoopList(List<?> list) {
-	    if (list != null && !list.isEmpty()) {
-	        return true;
-	    }
-	    return false;
+		target.addAffordance(new Take((SWEntityInterface) target, this.messageRenderer)); 
+		target.removeAffordance(new Leave((SWEntityInterface) target, this.messageRenderer)); 
 	}
 }
+	
 
 
-//remove attack affordance for each dead player ater grenade
