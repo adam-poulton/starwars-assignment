@@ -25,7 +25,34 @@ Review & Testing
 
 29th April, 2018
 Review and Improve (TBA)
-Finalise Design & SUBMIT
+Finalize Design & SUBMIT
+
+
+WBA II
+
+	Continue coding for part 1
+
+WBA III
+
+Alex:
+		Class Diagrams & Rationale for:
+			Grenade 
+			Reservoir
+		Code functionality for:
+			Grenade 
+		Test functionality for:
+			Reservoir
+			Sandcrawler
+		
+			
+Adam:
+		Class Diagrams & Rationale for:
+			Sandcrawler
+		Code functionality for:
+			Reservoir
+			Sandcrawler 
+		Test functionality for:
+			Grenade
 
 
 I, Alex Minagall, accept this Work Breakdown Agreement

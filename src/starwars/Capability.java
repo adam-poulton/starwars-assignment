@@ -16,5 +16,5 @@ public enum Capability {
 	DRINKABLE,//DRINKABLE capability allows an entity to be consumed by another entity
 	TRAINABLE,//TRAINABLE capability allows an entity to be trained in the force by another entity
 				// which has the Train affordance. Any TRAINABLE Entity MUST implement the Trainable interface
-	
+	THROWABLE, //THROWABLE capability allows an entity to Throw another entity which has the Throw Affordance
 }

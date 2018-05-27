@@ -28,7 +28,7 @@ import starwars.actions.Attack;
 import starwars.actions.Move;
 import starwars.entities.Trainable;
 
-import static starwars.Force.getLightsaberRequirement;
+
 /*
  * Changelog
  *
@@ -68,6 +68,18 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 	 * <code>force</code> is null if this <code>SWActor</code> cannot use the force.
 	 */
 	private Force force;
+	
+	/**
+	 * Defines the number of turns this SWActor must wait after moving before it can move again
+	 * Default value should be 0, for actors that have a movement cooldown this should be set via the {@link #setMovementCooldown()} method
+	 * 
+	 */
+	private int movementCooldown = 0;
+	
+	/**
+	 * Tracks the number of turns that this SWActor has not moved in order to evaluate when it can move again.
+	 */
+	private int idleCounter = 0;
 	
 	/**
 	 * Constructor for the <code>SWActor</code>.
@@ -276,11 +288,13 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 				newActions.add(a);
 		}
 		
-		// add new movement possibilities
-		for (CompassBearing d: CompassBearing.values()) { 														  
-			if (loc.getNeighbour(d) != null) //if there is an exit from the current location in direction d, add that as a Move command
-				newActions.add(new Move(d,messageRenderer, world)); 
-		}
+		
+		if (this.canMove())
+			// add new movement possibilities
+			for (CompassBearing d: CompassBearing.values()) { 														  
+				if (loc.getNeighbour(d) != null) //if there is an exit from the current location in direction d, add that as a Move command
+					newActions.add(new Move(d,messageRenderer, world)); 
+			}
 		
 		// replace command list of this SWActor
 		this.actions = newActions;		
@@ -342,5 +356,19 @@ public abstract class SWActor extends Actor<SWActionInterface> implements SWEnti
 		if (this.isUntrained() && this.canUseForce()) {
 			this.getForce().train();
 		}
+	}
+	
+	public void setMovementCooldown(int cooldown){
+		if (cooldown >= 0){
+			this.movementCooldown = cooldown;
+		}
+	}
+	
+	public boolean canMove(){
+		return this.movementCooldown == this.idleCounter;
+	}
+	
+	public void resetMovementCounter(){
+		this.idleCounter = 0;
 	}
 }

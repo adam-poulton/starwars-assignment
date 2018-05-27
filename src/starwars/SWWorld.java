@@ -1,5 +1,10 @@
 package starwars;
 
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import edu.monash.fit2099.gridworld.Grid.CompassBearing;
 import edu.monash.fit2099.simulator.matter.EntityManager;
 import edu.monash.fit2099.simulator.space.Direction;
@@ -42,6 +47,8 @@ public class SWWorld extends World {
 		space = myGrid;
 		
 	}
+	
+	
 
 	/** 
 	 * Returns the height of the <code>Grid</code>. Useful to the Views when rendering the map.
@@ -114,15 +121,42 @@ public class SWWorld extends World {
 		
 		loc = myGrid.getLocationByCoordinates(5,9);
 		
+		
 		// Luke
-		Player luke = new Player(Team.GOOD, 100, iface, this);
-		luke.setShortDescription("Luke");
-		entityManager.setLocation(luke, loc);
-		luke.resetMoveCommands(loc);
-		luke.setForce(new Force());
-		luke.addCapability(Capability.TRAINABLE);
-		luke.addAffordance(new Train(luke, iface));
-
+		//Player luke = new Player(Team.GOOD, 100, iface, this);
+		//luke.setShortDescription("Luke");
+		//entityManager.setLocation(luke, loc);
+		//luke.resetMoveCommands(loc);
+		//luke.setForce(new Force());
+		//luke.addCapability(Capability.TRAINABLE);
+		//luke.addAffordance(new Train(luke, iface));
+		
+		
+		//2 player game!!!
+		
+		loc = myGrid.getLocationByCoordinates(0,0);
+		
+		Player playerOne = new Player(Team.GOOD, 100, iface, this);
+		playerOne.setShortDescription("Player One");
+		entityManager.setLocation(playerOne, loc);
+		playerOne.resetMoveCommands(loc);
+		playerOne.setSymbol(readString("Enter Player One's symbol: "));
+		playerOne.setForce(new Force());
+		playerOne.addCapability(Capability.TRAINABLE);
+		playerOne.addAffordance(new Train(playerOne, iface));
+		
+		loc = myGrid.getLocationByCoordinates(9,9);
+		
+		Player playerTwo = new Player(Team.GOOD, 100, iface, this);
+		playerTwo.setShortDescription("Player Two");
+		entityManager.setLocation(playerTwo, loc);
+		playerTwo.resetMoveCommands(loc);
+		playerTwo.setSymbol(readString("Enter Player Two's symbol: "));
+		playerTwo.setForce(new Force());
+		playerTwo.addCapability(Capability.TRAINABLE);
+		playerTwo.addAffordance(new Train(playerTwo, iface));
+		
+		
 		
 		// Beggar's Canyon 
 		for (int col = 3; col < 8; col++) {
@@ -179,16 +213,52 @@ public class SWWorld extends World {
 		loc = myGrid.getLocationByCoordinates(3, 4);
 		entityManager.setLocation(blaster, loc);
 		
+		// A grenade 
+		Grenade grenade = new Grenade(iface);
+		loc = myGrid.getLocationByCoordinates(2, 1);
+		entityManager.setLocation(grenade, loc);
+		
+		// A grenade 
+		Grenade grenade2 = new Grenade(iface);
+		loc = myGrid.getLocationByCoordinates(8, 8);
+		entityManager.setLocation(grenade2, loc);
+		
 		// A Tusken Raider
 		TuskenRaider tim = new TuskenRaider(10, "Tim", iface, this);
 		tim.setSymbol("T");
 		loc = myGrid.getLocationByCoordinates(4,3);
 		entityManager.setLocation(tim, loc);
 		
+		// A Droid called C3PO
 		Droid C3PO = new Droid(10, "C3PO", iface, this);
 		C3PO.setSymbol("D");
 		loc = myGrid.getLocationByCoordinates(5,4);
 		entityManager.setLocation(C3PO, loc);
+		
+		// A test Droid for grenade 10pt
+		Droid gronk = new Droid(10, "gronk", iface, this);
+		gronk.setSymbol("D");
+		loc = myGrid.getLocationByCoordinates(8,7);
+		entityManager.setLocation(gronk, loc);
+		
+		// A test Droid for grenade 5pt 
+		Droid gronk1 = new Droid(10, "gronk", iface, this);
+		gronk1.setSymbol("D");
+		loc = myGrid.getLocationByCoordinates(8,6);
+		entityManager.setLocation(gronk1, loc);
+
+		
+		// A test Droid for grenade 10pt
+		Droid gronk3 = new Droid(10, "gronk", iface, this);
+		gronk3.setSymbol("D");
+		loc = myGrid.getLocationByCoordinates(9,6);
+		entityManager.setLocation(gronk3, loc);
+
+		// A test Droid for grenade 5pt 
+		Droid gronk11 = new Droid(10, "gronk", iface, this);
+		gronk11.setSymbol("D");
+		loc = myGrid.getLocationByCoordinates(8,6);
+		entityManager.setLocation(gronk11, loc);		
 
 	}
 
@@ -270,4 +340,17 @@ public class SWWorld extends World {
 	public static EntityManager<SWEntityInterface, SWLocation> getEntitymanager() {
 		return entityManager;
 	}
+	
+	private String readString(String prompt) {
+		System.out.print(prompt);
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in)
+		);
+		String s = null;
+		try {
+			s = in.readLine();
+		} catch (IOException e) {
+		e.printStackTrace();
+		 }
+		return s;
+		 }
 }
